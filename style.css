@@ -8,7 +8,7 @@ body {
     direction: rtl;
     /* تعيين الخلفية العامة للموقع */
 
-    background-image: url('https://web.whatsapp.com/img/bg-chat-tile-dark_a4be512e7195b6b733d9110b408f075d.png');
+    background-image: url('https://theabbie.github.io/blog/assets/official-whatsapp-background-image.jpg');
     background-size: cover; /* لضمان أن تغطي الخلفية الشاشة بالكامل */
     background-position: center; /* لتوسيط الخلفية بشكل مثالي */
     background-repeat: no-repeat; /* لمنع تكرار الخلفية */
