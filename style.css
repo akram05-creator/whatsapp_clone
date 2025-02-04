@@ -6,7 +6,19 @@ body {
     margin: 50px;
     background-color: #f4f4f4;
     direction: rtl;
+    /* تعيين الخلفية العامة للموقع */
+
+    background-image: url('https://web.whatsapp.com/img/bg-chat-tile-dark_a4be512e7195b6b733d9110b408f075d.png');
+    background-size: cover; /* لضمان أن تغطي الخلفية الشاشة بالكامل */
+    background-position: center; /* لتوسيط الخلفية بشكل مثالي */
+    background-repeat: no-repeat; /* لمنع تكرار الخلفية */
+    background-attachment: fixed; /* لجعل الخلفية ثابتة عند التمرير */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
+
+
 
 .container {
     background: white;
